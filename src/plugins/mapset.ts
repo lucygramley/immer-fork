@@ -115,11 +115,11 @@ export function enableMapSet() {
 			return draft
 		}
 
-		keys(): IterableIterator<any> {
+		keys(): MapIterator<any> {
 			return latest(this[DRAFT_STATE]).keys()
 		}
 
-		values(): IterableIterator<any> {
+		values(): MapIterator<any> {
 			const iterator = this.keys()
 			return {
 				[Symbol.iterator]: () => this.values(),
@@ -136,7 +136,7 @@ export function enableMapSet() {
 			} as any
 		}
 
-		entries(): IterableIterator<[any, any]> {
+		entries(): MapIterator<[any, any]> {
 			const iterator = this.keys()
 			return {
 				[Symbol.iterator]: () => this.entries(),
@@ -244,21 +244,21 @@ export function enableMapSet() {
 			}
 		}
 
-		values(): IterableIterator<any> {
+		values(): SetIterator<any> {
 			const state: SetState = this[DRAFT_STATE]
 			assertUnrevoked(state)
 			prepareSetCopy(state)
 			return state.copy_!.values()
 		}
 
-		entries(): IterableIterator<[any, any]> {
+		entries(): SetIterator<[any, any]> {
 			const state: SetState = this[DRAFT_STATE]
 			assertUnrevoked(state)
 			prepareSetCopy(state)
 			return state.copy_!.entries()
 		}
 
-		keys(): IterableIterator<any> {
+		keys(): SetIterator<any> {
 			return this.values()
 		}
 
