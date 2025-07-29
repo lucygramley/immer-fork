@@ -1,0 +1,383 @@
+[2025-07-29 10:08:30.489] Changing working directory from C:\Users\lucygramley to c:\Users\lucygramley\Downloads\ai_test_repos\immer-fork
+[2025-07-29 10:09:11.744] Updating 18 packages at c:\Users\lucygramley\Downloads\ai_test_repos\immer-fork
+[2025-07-29 10:09:27.758] Analyzing project at: c:\Users\lucygramley\Downloads\ai_test_repos\immer-fork
+[2025-07-29 10:09:27.759] Analyzing repository structure...
+[2025-07-29 10:09:28.046] No monorepo structure detected
+[2025-07-29 10:09:28.049] Generating installation commands...
+[2025-07-29 10:09:28.070] Found 2 package installation tasks
+[2025-07-29 10:09:28.073] Installing packages...
+[2025-07-29 10:10:23.628] Looking for local TypeScript installation...
+[2025-07-29 10:10:23.634] Using local TypeScript compiler at: c:\Users\lucygramley\Downloads\ai_test_repos\immer-fork\node_modules\typescript\lib\tsc.js
+[2025-07-29 10:10:23.636] Building project to collect baseline errors...
+[2025-07-29 10:10:32.567] Found 0 errors in initial build
+[2025-07-29 10:10:58.771] Updating packages in the following order:
+ @babel/core jest ts-jest tsup typescript, @types/jest, coveralls, cpx2, flow-bin, husky, immutable, lodash, prettier pretty-quick, redux, rimraf, seamless-immutable, semantic-release
+[2025-07-29 10:10:59.032] Using VS Code provided token for Kusto authentication
+[2025-07-29 10:10:59.086] Updating package group (1/13): @babel/core jest ts-jest tsup typescript
+[2025-07-29 10:11:28.131] Updating @babel/core from ^7.21.3 to ^7.28.0, jest from ^29.5.0 to ^30.0.5, ts-jest from ^29.0.0 to ^29.4.0, tsup from ^6.7.0 to ^8.5.0, typescript from ^5.0.2 to ^5.8.3
+[2025-07-29 10:11:33.297] No new errors found after updating @babel/core jest ts-jest tsup typescript.
+[2025-07-29 10:11:33.300] Modified files while updating package(s) @babel/core jest ts-jest tsup typescript: 
+package.json
+yarn.lock
+[2025-07-29 10:11:33.303] Deleted temp directory for PackageUpdater.
+[2025-07-29 10:11:33.306] Package group @babel/core jest ts-jest tsup typescript completed in 00:00:34.
+Successfully upgraded 5 packages: @babel/core,jest,ts-jest,tsup,typescript
+[2025-07-29 10:11:33.309] Using VS Code provided token for Kusto authentication
+[2025-07-29 10:11:33.310] Updating package group (2/13): @types/jest
+[2025-07-29 10:11:43.021] Updating @types/jest from ^25.1.2 to ^30.0.0
+[2025-07-29 10:11:49.761] Found 9 new errors after updating @types/jest.
+[2025-07-29 10:11:49.800] Executing query: Errors
+                         | where PackageName == '@types/jest' and TargetVersion == '30'
+[2025-07-29 10:11:51.054] Kusto query failed: Unauthorized (401-Unauthorized): . This normally represents a permanent error, and retrying is unlikely to help.
+Error details:
+DataSource='https://typescripterrors.eastus2.kusto.windows.net/v1/rest/query',
+DatabaseName='typescripterrors',
+ClientRequestId='KD2RunQuery;ff2269d0-139e-438c-a154-e618fabf825d',
+ActivityId='a847d038-c574-4dd1-bc36-5047f561dfa8,
+Timestamp='2025-07-29T17:11:51.0116573Z'.
+[2025-07-29 10:11:51.055] Authentication error detected. The VS Code token may have expired (30-day lifetime). Please restart VS Code or refresh the Kusto token using the 'JS/TS Upgrade: Refresh Kusto Authentication Token' command.
+[2025-07-29 10:11:51.058] No fixes found for package @types/jest version 30
+[2025-07-29 10:11:51.063] 9 errors left after applying known fixes. Attempting to resolve with AI...
+[2025-07-29 10:11:51.065] Fixing 9 build errors after updating @types/jest
+[2025-07-29 10:11:51.068] 5 error groups left.
+[2025-07-29 10:11:51.076] Attempting to fix error group with errors:
+Example 1:
+../src/plugins/mapset.ts:118:3 - error TS2416: Property 'keys' in type 'DraftMap' is not assignable to the same property in base type 'Map<any, any>'.
+
+  Type '() => IterableIterator<any>' is not assignable to type '() => MapIterator<any>'.
+
+    Property '[Symbol.dispose]' is missing in type 'IterableIterator<any>' but required in type 'MapIterator<any>'.
+
+
+
+118   keys(): IterableIterator<any> {
+
+      ~~~~
+
+
+
+  ../node_modules/typescript/lib/lib.esnext.disposable.d.ts:36:5
+
+    36     [Symbol.dispose](): void;
+
+           ~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    '[Symbol.dispose]' is declared here.
+
+Example 2:
+../src/plugins/mapset.ts:261:3 - error TS2416: Property 'keys' in type 'DraftSet' is not assignable to the same property in base type 'Set<any>'.
+
+  Type '() => IterableIterator<any>' is not assignable to type '() => SetIterator<any>'.
+
+    Property '[Symbol.dispose]' is missing in type 'IterableIterator<any>' but required in type 'SetIterator<any>'.
+
+
+
+261   keys(): IterableIterator<any> {
+
+      ~~~~
+
+
+
+  ../node_modules/typescript/lib/lib.esnext.disposable.d.ts:36:5
+
+    36     [Symbol.dispose](): void;
+
+           ~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    '[Symbol.dispose]' is declared here.
+
+
+[2025-07-29 10:12:09.016] GetAIResponseAsync took 17929 ms
+[2025-07-29 10:12:09.018] Group develop plan response: # TypeScript Compilation Error Fix Plan
+
+## Summary
+The errors indicate that TypeScript's iterator types have been updated to require a `[Symbol.dispose]` method, changing from `IterableIterator<T>` to `MapIterator<T>` and `SetIterator<T>`. This is likely due to TypeScript's support for the disposable pattern in newer versions.
+
+## Root Cause Analysis
+- The `DraftMap` and `DraftSet` classes extend native `Map` and `Set` types
+- Their `keys()` methods return `IterableIterator<any>` but the base classes now expect `MapIterator<any>` and `SetIterator<any>` respectively
+- The new iterator types include a `[Symbol.dispose]()` method for resource cleanup
+
+## Fix Strategy
+Update the return types of iterator methods in custom Map/Set implementations to use the new TypeScript iterator types that include the disposable symbol.
+
+## Execution Plan
+
+### Step 1: Examine the mapset.ts file structure
+```
+OpenFile
+- filePath: "src/plugins/mapset.ts"
+```
+
+### Step 2: Locate the DraftMap class and its keys method
+```
+SearchFileForOccurrences
+- filePath: "src/plugins/mapset.ts"
+- searchString: "class DraftMap"
+```
+
+### Step 3: Locate the DraftSet class and its keys method
+```
+SearchFileForOccurrences
+- filePath: "src/plugins/mapset.ts"
+- searchString: "class DraftSet"
+```
+
+### Step 4: Examine the specific error locations in detail
+```
+OpenFileLines
+- filePath: "src/plugins/mapset.ts"
+- startLine: 115
+- endLine: 125
+```
+
+### Step 5: Examine the DraftSet keys method
+```
+OpenFileLines
+- filePath: "src/plugins/mapset.ts"
+- startLine: 258
+- endLine: 268
+```
+
+### Step 6: Search for other iterator methods that may need fixing
+```
+SearchFileForOccurrences
+- filePath: "src/plugins/mapset.ts"
+- searchString: "IterableIterator"
+```
+
+### Step 7: Apply systematic fix using regex replacements
+```
+ApplyRegexSolutions
+{
+  "files": ["src/plugins/mapset.ts"],
+  "replacements": [
+    {
+      "pattern": "keys\\(\\):\\s*IterableIterator<any>",
+      "replacement": "keys(): MapIterator<any>"
+    },
+    {
+      "pattern": "keys\\(\\):\\s*IterableIterator<([^>]+)>",
+      "replacement": "keys(): MapIterator<$1>"
+    },
+    {
+      "pattern": "values\\(\\):\\s*IterableIterator<any>",
+      "replacement": "values(): MapIterator<any>"
+    },
+    {
+      "pattern": "values\\(\\):\\s*IterableIterator<([^>]+)>",
+      "replacement": "values(): MapIterator<$1>"
+    },
+    {
+      "pattern": "entries\\(\\):\\s*IterableIterator<\\[any,\\s*any\\]>",
+      "replacement": "entries(): MapIterator<[any, any]>"
+    }
+  ]
+}
+```
+
+### Step 8: Apply Set-specific iterator fixes if needed
+```
+ApplyRegexSolutions
+{
+  "files": ["src/plugins/mapset.ts"],
+  "replacements": [
+    {
+      "pattern": "(class DraftSet[\\s\\S]*?)keys\\(\\):\\s*IterableIterator<any>",
+      "replacement": "$1keys(): SetIterator<any>"
+    },
+    {
+      "pattern": "(class DraftSet[\\s\\S]*?)keys\\(\\):\\s*IterableIterator<([^>]+)>",
+      "replacement": "$1keys(): SetIterator<$2>"
+    },
+    {
+      "pattern": "(class DraftSet[\\s\\S]*?)values\\(\\):\\s*IterableIterator<any>",
+      "replacement": "$1values(): SetIterator<any>"
+    },
+    {
+      "pattern": "(class DraftSet[\\s\\S]*?)values\\(\\):\\s*IterableIterator<([^>]+)>",
+      "replacement": "$1values(): SetIterator<$2>"
+    }
+  ]
+}
+```
+
+## Expected Outcome
+After applying these fixes, the TypeScript compiler should recognize that the iterator methods return the correct types (`MapIterator` and `SetIterator`) that include the required `[Symbol.dispose]` method, resolving the compilation errors.
+[2025-07-29 10:12:12.646] Tool OpenFile invoked with arguments ["src/plugins/mapset.ts"]
+[2025-07-29 10:12:12.648] OpenFile took 10 ms
+[2025-07-29 10:12:16.209] Tool SearchFileForOccurrences invoked with arguments ["src/plugins/mapset.ts","class DraftMap"]
+[2025-07-29 10:12:17.008] SearchFileForOccurrences took 798 ms
+[2025-07-29 10:12:19.645] Tool SearchFileForOccurrences invoked with arguments ["src/plugins/mapset.ts","DraftMap\u0022"]
+[2025-07-29 10:12:20.248] SearchFileForOccurrences took 603 ms
+[2025-07-29 10:12:22.983] Tool SearchFileForOccurrences invoked with arguments ["src/plugins/mapset.ts","keys(): IterableIterator\u0022"]
+[2025-07-29 10:12:23.530] SearchFileForOccurrences took 546 ms
+[2025-07-29 10:12:26.276] Tool SearchFileForOccurrences invoked with arguments ["src/plugins/mapset.ts","keys():\u0022"]
+[2025-07-29 10:12:26.865] SearchFileForOccurrences took 588 ms
+[2025-07-29 10:12:30.166] Tool SearchFileForOccurrences invoked with arguments ["src/plugins/mapset.ts","keys():"]
+[2025-07-29 10:12:30.621] SearchFileForOccurrences took 455 ms
+[2025-07-29 10:12:34.248] Tool SearchFileForOccurrences invoked with arguments ["src/plugins/mapset.ts","keys()\u0022"]
+[2025-07-29 10:12:34.813] SearchFileForOccurrences took 564 ms
+[2025-07-29 10:12:37.275] Tool SearchFileForOccurrences invoked with arguments ["src/plugins/mapset.ts","IterableIterator\u0022"]
+[2025-07-29 10:12:37.869] SearchFileForOccurrences took 594 ms
+[2025-07-29 10:12:45.065] Tool OpenFileLines invoked with arguments ["src/plugins/mapset.ts",115,125]
+[2025-07-29 10:12:45.069] OpenFileLines took 7 ms
+[2025-07-29 10:12:48.373] Tool OpenFileLines invoked with arguments ["src/plugins/mapset.ts",258,268]
+[2025-07-29 10:12:48.376] OpenFileLines took 3 ms
+[2025-07-29 10:12:54.214] Tool SearchFileForOccurrences invoked with arguments ["src/plugins/mapset.ts","IterableIterator"]
+[2025-07-29 10:12:54.798] SearchFileForOccurrences took 584 ms
+[2025-07-29 10:13:00.182] Tool OpenFileLines invoked with arguments ["src/plugins/mapset.ts",118,140]
+[2025-07-29 10:13:00.187] OpenFileLines took 4 ms
+[2025-07-29 10:13:03.099] Tool OpenFileLines invoked with arguments ["src/plugins/mapset.ts",250,270]
+[2025-07-29 10:13:03.109] OpenFileLines took 9 ms
+[2025-07-29 10:13:09.495] Tool OpenFileLines invoked with arguments ["src/plugins/mapset.ts",240,252]
+[2025-07-29 10:13:09.499] OpenFileLines took 3 ms
+[2025-07-29 10:13:26.575] Tool ApplyRegexSolutions invoked with arguments ["{\n  \u0022files\u0022: [\u0022src/plugins/mapset.ts\u0022],\n  \u0022replacements\u0022: [\n    {\n      \u0022pattern\u0022: \u0022(class DraftMap[\\\\s\\\\S]*?)keys\\\\(\\\\): IterableIterator\u003Cany\u003E\u0022,\n      \u0022replacement\u0022: \u0022$1keys(): MapIterator\u003Cany\u003E\u0022\n    },\n    {\n      \u0022pattern\u0022: \u0022(class DraftMap[\\\\s\\\\S]*?)values\\\\(\\\\): IterableIterator\u003Cany\u003E\u0022,\n      \u0022replacement\u0022: \u0022$1values(): MapIterator\u003Cany\u003E\u0022\n    },\n    {\n      \u0022pattern\u0022: \u0022(class DraftMap[\\\\s\\\\S]*?)entries\\\\(\\\\): IterableIterator\u003C\\\\[any, any\\\\]\u003E\u0022,\n      \u0022replacement\u0022: \u0022$1entries(): MapIterator\u003C[any, any]\u003E\u0022\n    },\n    {\n      \u0022pattern\u0022: \u0022(class DraftSet[\\\\s\\\\S]*?)values\\\\(\\\\): IterableIterator\u003Cany\u003E\u0022,\n      \u0022replacement\u0022: \u0022$1values(): SetIterator\u003Cany\u003E\u0022\n    },\n    {\n      \u0022pattern\u0022: \u0022(class DraftSet[\\\\s\\\\S]*?)entries\\\\(\\\\): IterableIterator\u003C\\\\[any, any\\\\]\u003E\u0022,\n      \u0022replacement\u0022: \u0022$1entries(): SetIterator\u003C[any, any]\u003E\u0022\n    },\n    {\n      \u0022pattern\u0022: \u0022(class DraftSet[\\\\s\\\\S]*?)keys\\\\(\\\\): IterableIterator\u003Cany\u003E\u0022,\n      \u0022replacement\u0022: \u0022$1keys(): SetIterator\u003Cany\u003E\u0022\n    }\n  ]\n}"]
+[2025-07-29 10:13:26.610] ApplyRegexSolutions took 35 ms
+[2025-07-29 10:13:26.611] ApplyRegexSolutions result: Success: Updated src/plugins/mapset.ts
+[2025-07-29 10:13:33.003] GetAIResponseAsync took 83983 ms
+[2025-07-29 10:13:35.909] Kusto query failed while checking duplicates: Unauthorized (401-Unauthorized): . This normally represents a permanent error, and retrying is unlikely to help.
+Error details:
+DataSource='https://typescripterrors.eastus2.kusto.windows.net/v1/rest/query',
+DatabaseName='typescripterrors',
+ClientRequestId='KD2RunQuery;f5cfcedc-b493-4d3f-8efb-837219f1f69a',
+ActivityId='2c626cdd-670f-4098-ba93-8ecceee79752,
+Timestamp='2025-07-29T17:13:35.9060318Z'.
+[2025-07-29 10:13:35.911] Authentication error detected. The VS Code token may have expired (30-day lifetime). Please restart VS Code or refresh the Kusto token using the 'JS/TS Upgrade: Refresh Kusto Authentication Token' command.
+[2025-07-29 10:13:35.913] All errors resolved
+[2025-07-29 10:13:35.914] Made progress in fixing errors. Rebuilding and regrouping remaining errors.
+[2025-07-29 10:13:38.981] Successfully resolved all build errors after updating @types/jest.
+[2025-07-29 10:13:38.984] Temp directory C:\Users\lucygramley\AppData\Local\Temp\group_cc7283258041444cae832acdb685daa5 deleted.
+[2025-07-29 10:13:38.987] Modified files while updating package(s) @types/jest: 
+package.json
+yarn.lock
+src/plugins/mapset.ts
+[2025-07-29 10:13:38.990] Deleted temp directory for PackageUpdater.
+[2025-07-29 10:13:38.992] Package group @types/jest completed in 00:02:05.
+Successfully upgraded 1 packages: @types/jest
+[2025-07-29 10:13:53.988] Using VS Code provided token for Kusto authentication
+[2025-07-29 10:13:53.992] Updating package group (3/13): coveralls
+[2025-07-29 10:14:02.423] Updating coveralls from ^3.0.0 to ^3.1.1
+[2025-07-29 10:14:04.921] No new errors found after updating coveralls.
+[2025-07-29 10:14:04.923] Modified files while updating package(s) coveralls: 
+package.json
+yarn.lock
+[2025-07-29 10:14:04.924] Deleted temp directory for PackageUpdater.
+[2025-07-29 10:14:04.926] Package group coveralls completed in 00:00:10.
+Successfully upgraded 1 packages: coveralls
+[2025-07-29 10:14:04.927] Using VS Code provided token for Kusto authentication
+[2025-07-29 10:14:04.930] Updating package group (4/13): cpx2
+[2025-07-29 10:14:13.776] Updating cpx2 from ^3.0.0 to ^8.0.0
+[2025-07-29 10:14:16.442] No new errors found after updating cpx2.
+[2025-07-29 10:14:16.446] Modified files while updating package(s) cpx2: 
+package.json
+yarn.lock
+[2025-07-29 10:14:16.450] Deleted temp directory for PackageUpdater.
+[2025-07-29 10:14:16.453] Package group cpx2 completed in 00:00:11.
+Successfully upgraded 1 packages: cpx2
+[2025-07-29 10:14:16.455] Using VS Code provided token for Kusto authentication
+[2025-07-29 10:14:16.458] Updating package group (5/13): flow-bin
+[2025-07-29 10:14:23.951] Updating flow-bin from ^0.123.0 to ^0.277.1
+[2025-07-29 10:14:26.573] No new errors found after updating flow-bin.
+[2025-07-29 10:14:26.575] Modified files while updating package(s) flow-bin: 
+package.json
+yarn.lock
+[2025-07-29 10:14:26.577] Deleted temp directory for PackageUpdater.
+[2025-07-29 10:14:26.579] Package group flow-bin completed in 00:00:10.
+Successfully upgraded 1 packages: flow-bin
+[2025-07-29 10:14:26.582] Using VS Code provided token for Kusto authentication
+[2025-07-29 10:14:26.584] Updating package group (6/13): husky
+[2025-07-29 10:14:34.138] Updating husky from ^1.2.0 to ^9.1.7
+[2025-07-29 10:14:36.758] No new errors found after updating husky.
+[2025-07-29 10:14:36.759] Modified files while updating package(s) husky: 
+package.json
+yarn.lock
+[2025-07-29 10:14:36.760] Deleted temp directory for PackageUpdater.
+[2025-07-29 10:14:36.762] Package group husky completed in 00:00:10.
+Successfully upgraded 1 packages: husky
+[2025-07-29 10:14:36.764] Using VS Code provided token for Kusto authentication
+[2025-07-29 10:14:36.766] Updating package group (7/13): immutable
+[2025-07-29 10:14:44.173] Updating immutable from ^3.8.2 to ^5.1.3
+[2025-07-29 10:14:46.655] No new errors found after updating immutable.
+[2025-07-29 10:14:46.657] Modified files while updating package(s) immutable: 
+package.json
+yarn.lock
+[2025-07-29 10:14:46.659] Deleted temp directory for PackageUpdater.
+[2025-07-29 10:14:46.661] Package group immutable completed in 00:00:09.
+Successfully upgraded 1 packages: immutable
+[2025-07-29 10:14:46.662] Using VS Code provided token for Kusto authentication
+[2025-07-29 10:14:46.665] Updating package group (8/13): lodash
+[2025-07-29 10:14:53.704] Updating lodash from ^4.17.4 to ^4.17.21
+[2025-07-29 10:14:56.193] No new errors found after updating lodash.
+[2025-07-29 10:14:56.196] Modified files while updating package(s) lodash: 
+package.json
+yarn.lock
+[2025-07-29 10:14:56.197] Deleted temp directory for PackageUpdater.
+[2025-07-29 10:14:56.199] Package group lodash completed in 00:00:09.
+Successfully upgraded 1 packages: lodash
+[2025-07-29 10:14:56.200] Using VS Code provided token for Kusto authentication
+[2025-07-29 10:14:56.202] Updating package group (9/13): prettier pretty-quick
+[2025-07-29 10:15:04.199] Updating prettier from 1.19.1 to 3.6.2, pretty-quick from ^1.8.0 to ^4.2.2
+[2025-07-29 10:15:06.917] No new errors found after updating prettier pretty-quick.
+[2025-07-29 10:15:06.919] Modified files while updating package(s) prettier pretty-quick: 
+package.json
+yarn.lock
+[2025-07-29 10:15:06.920] Deleted temp directory for PackageUpdater.
+[2025-07-29 10:15:06.922] Package group prettier pretty-quick completed in 00:00:10.
+Successfully upgraded 2 packages: prettier,pretty-quick
+[2025-07-29 10:15:06.924] Using VS Code provided token for Kusto authentication
+[2025-07-29 10:15:06.926] Updating package group (10/13): redux
+[2025-07-29 10:15:14.457] Updating redux from ^4.0.5 to ^5.0.1
+[2025-07-29 10:15:17.104] No new errors found after updating redux.
+[2025-07-29 10:15:17.105] Modified files while updating package(s) redux: 
+package.json
+yarn.lock
+[2025-07-29 10:15:17.106] Deleted temp directory for PackageUpdater.
+[2025-07-29 10:15:17.107] Package group redux completed in 00:00:10.
+Successfully upgraded 1 packages: redux
+[2025-07-29 10:15:17.108] Using VS Code provided token for Kusto authentication
+[2025-07-29 10:15:17.111] Updating package group (11/13): rimraf
+[2025-07-29 10:15:24.603] Updating rimraf from ^2.6.2 to ^6.0.1
+[2025-07-29 10:15:27.125] No new errors found after updating rimraf.
+[2025-07-29 10:15:27.128] Modified files while updating package(s) rimraf: 
+package.json
+yarn.lock
+[2025-07-29 10:15:27.130] Deleted temp directory for PackageUpdater.
+[2025-07-29 10:15:27.132] Package group rimraf completed in 00:00:10.
+Successfully upgraded 1 packages: rimraf
+[2025-07-29 10:15:27.135] Using VS Code provided token for Kusto authentication
+[2025-07-29 10:15:27.137] Updating package group (12/13): seamless-immutable
+[2025-07-29 10:15:34.469] Updating seamless-immutable from ^7.1.3 to ^7.1.4
+[2025-07-29 10:15:36.905] No new errors found after updating seamless-immutable.
+[2025-07-29 10:15:36.906] Modified files while updating package(s) seamless-immutable: 
+package.json
+yarn.lock
+[2025-07-29 10:15:36.908] Deleted temp directory for PackageUpdater.
+[2025-07-29 10:15:36.910] Package group seamless-immutable completed in 00:00:09.
+Successfully upgraded 1 packages: seamless-immutable
+[2025-07-29 10:15:36.912] Using VS Code provided token for Kusto authentication
+[2025-07-29 10:15:36.913] Updating package group (13/13): semantic-release
+[2025-07-29 10:16:12.890] Updating semantic-release from ^17.0.2 to ^24.2.7
+[2025-07-29 10:16:15.587] No new errors found after updating semantic-release.
+[2025-07-29 10:16:15.590] Modified files while updating package(s) semantic-release: 
+package.json
+yarn.lock
+[2025-07-29 10:16:15.592] Deleted temp directory for PackageUpdater.
+[2025-07-29 10:16:15.595] Package group semantic-release completed in 00:00:38.
+Successfully upgraded 1 packages: semantic-release
+[2025-07-29 10:16:15.597] All packages updated.
+[2025-07-29 10:16:15.599] Updater completed in 00:07:45.
+Successfully upgraded 18 packages.
+Partially upgraded 0 packages.
+Unable to upgrade 0 packages.
+Total packages available for upgrade: 18
+[2025-07-29 10:16:15.603] === Token Usage Summary ===
+Total API Calls: 7
+Total Tokens: 224430 (Prompt: 220331, Completion: 4099)
+Usage by Model:
+  claude-sonnet-4:
+    Calls: 7
+    Tokens: 224430 (Prompt: 220331, Completion: 4099)
+
+[2025-07-29 10:16:15.605] Report written to c:\Users\lucygramley\.vscode-insiders\extensions\emilyfischer.jsts-upgrade-extension-0.0.1\dist\updates\logs\immer-fork_2025-07-29_10-08-30.txt
